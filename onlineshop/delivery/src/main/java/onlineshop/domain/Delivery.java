@@ -122,6 +122,17 @@ public class Delivery  {
 
 
     }
+    
+    public static void deliveryCancelled(OrderCancelled ordered){
+
+        Delivery delivery = new Delivery();
+        /*
+        LOGIC GOES HERE
+        */
+        repository().save(delivery);
+
+
+    }
 
 
 }
