@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderView
+  labels:
+    app: orderView
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: orderView
