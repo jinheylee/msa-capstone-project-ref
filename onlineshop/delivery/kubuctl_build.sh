@@ -1,1 +1,0 @@
-mvn spirng-boot:run &
