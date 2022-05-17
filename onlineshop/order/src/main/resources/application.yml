@@ -17,7 +17,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: bitnami-kafka2:9092
+          brokers: localhost:9092
         streams:
           binder:
             configuration:
