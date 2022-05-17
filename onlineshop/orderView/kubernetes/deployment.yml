@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: orderView
   labels:
-    app: order
+    app: orderView
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: order
+      app: orderView
   template:
     metadata:
       labels:
-        app: order
+        app: orderView
     spec:
       containers:
-        - name: order
-          image: username/order:latest
+        - name: orderView
+          image: username/orderView:latest
           ports:
             - containerPort: 8080
           readinessProbe:
