@@ -1,0 +1,17 @@
+version: 0.2
+
+env:
+  variables:
+   _PROJECT_NAME: "onlineshop"
+
+phases:
+  build:
+    commands:
+      - echo Build Starting on `date`
+      
+  post_build:
+    commands:
+      - echo make docker image
+      - echo connect kubectl
+      - kubuctl_build.sh
+      
