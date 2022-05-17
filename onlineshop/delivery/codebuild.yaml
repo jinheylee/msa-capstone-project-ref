@@ -13,5 +13,5 @@ phases:
     commands:
       - echo make docker image
       - echo connect kubectl
-      - kubuctl_build.sh
+      - bash kubuctl_build.sh
       
