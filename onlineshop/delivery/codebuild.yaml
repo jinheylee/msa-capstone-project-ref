@@ -14,5 +14,6 @@ phases:
       - echo make docker image
       - echo connect kubectl
       - pwd
+      - cd ./onlineshop/delivery
       - bash ./kubuctl_build.sh
       
