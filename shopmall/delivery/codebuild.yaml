@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build Starting on `date`
+      - mvn sping-boot:run
+  post_build:
+    commands:
+      - echo end
