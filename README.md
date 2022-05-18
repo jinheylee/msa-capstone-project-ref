@@ -667,7 +667,44 @@ kubectl apply -f 4.deployment.yaml
 kubectl apply -f 5.deployment.yaml
 ```
 
-- AWS에서 CodeBuild 프로젝트를 생성 하고 codeBuild 프로젝트 생성 및 시작
+- AWS에서 CodeBuild 프로젝트를 생성 
+
+```
+빌드 프로젝트 구성
+```
+
+![coudebuild image](./CICD/build1.JPG)
+
+
+```
+빌드 소스 경로 추가를 위한 레퍼지토리 연동 설정
+```
+
+![coudebuild image](./CICD/build2.JPG)
+
+```
+빌드 환경 설정
+```
+
+![coudebuild image](./CICD/build3.JPG)
+
+
+```
+codebuild.yaml 경로 설정 
+```
+
+![coudebuild image](./CICD/build4.JPG)
+
+
+```
+빌드 로그 확인을 위한 cloudwatch 로그 선택 
+```
+
+![coudebuild image](./CICD/build4.JPG)
+
+
+
+- codeBuild 시작
 
 ![coudebuild image](./CICD/codebuild_image1.JPG)
 
