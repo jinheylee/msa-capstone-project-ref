@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: onlineshop-order
+spec:
+  hosts:
+    - "*"
+  gateways:
+  - onlineshop
+  http:
+  - match:
+    - uri:
+        prefix: /order
+    route:
+    - destination:
+        host: order
+        port:
+          number: 8080
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: onlineshop-delivery
+spec:
+  hosts:
+    - "*"
+  gateways:
+  - onlineshop
+  http:
+  - match:
+    - uri:
+        prefix: /delivery
+    route:
+    - destination:
+        host: delivery
+        port:
+          number: 8080
+

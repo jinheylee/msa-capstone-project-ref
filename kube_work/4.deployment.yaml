@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-pass
+type: Opaque
+data:
+  password: YWRtaW4=     
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    name: lbl-k8s-mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql:latest
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysql-pass
+          key: password
+    ports:
+    - name: mysql
+      containerPort: 3306
+      protocol: TCP
+    volumeMounts:
+    - name: k8s-mysql-storage
+      mountPath: /var/lib/mysql
+  volumes:
+  - name: k8s-mysql-storage
+    persistentVolumeClaim:
+      claimName: "fs"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: lbl-k8s-mysql
+  name: mysql
+  namespace: default
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    name: lbl-k8s-mysql
+  type: ClusterIP
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata: 
+  name: "order"
+  labels: 
+    app: "order"
+spec: 
+  selector: 
+    matchLabels: 
+      app: "order"
+  replicas: 1
+  template: 
+    metadata: 
+      labels: 
+        app: "order"
+    spec: 
+      containers: 
+        - 
+          name: "order"
+          image: "nukking/order:db"
+          ports: 
+            - 
+              containerPort: 80
+          env:
+            - name: superuser.userId
+              value: userId
+            - name: _DATASOURCE_ADDRESS
+              value: mysql
+            - name: _DATASOURCE_TABLESPACE
+              value: orderdb
+            - name: _DATASOURCE_USERNAME
+              value: root
+            - name: _DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
