@@ -8,15 +8,10 @@ phases:
   build:
     commands:
       - echo Build Starting on `date`
-      - echo install kubectl
-      - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
       
   post_build:
     commands:
       - echo make docker image
-      - cd /home/msa-capstone-project/onlineshop
-      - cd docker build -t onlineshop/onlineshop:v1
-      - echo connect kubectl
       - cd ./onlineshop/delivery
       - mvn spring-boot:run &
       
