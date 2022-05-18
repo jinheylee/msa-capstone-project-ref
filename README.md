@@ -1,4 +1,4 @@
-# msa-capstone-project
+# msa-capstone-project, Onlineshop
 
 # 평가항목 : 담당자
 * 분석설계 : 다같이
