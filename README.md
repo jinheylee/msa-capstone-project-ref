@@ -12,7 +12,7 @@
 * Autoscale(HPA) : 서정훈
 * Self-healing(Liveness Probe) : 서정훈
 * Zero-downtime deploy(Readiness Probe) : 서정훈
-* Config Map / Persustemce Volume : 서정훈 
+* Config Map / Persistence Volume : 서정훈 
 * Polyglot : 서정훈 
 
 
