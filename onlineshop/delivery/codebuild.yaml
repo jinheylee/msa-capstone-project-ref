@@ -14,7 +14,3 @@ phases:
       - echo make docker image
       - cd ./onlineshop/delivery
       - mvn spring-boot:run &
-      
- cache:
-  paths:
-   - '/root/.m2/**/*'
