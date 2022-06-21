@@ -314,19 +314,19 @@ Transfer-Encoding: chunked
 http POST :8081/orders productId=1 qty=1
 ```
 ```
-HTTP/1.1 201
+HTTP/1.1 201 
 Content-Type: application/json;charset=UTF-8
-Date: Tue, 17 May 2022 12:16:20 GMT
-Location: http://localhost:8081/orders/3
+Date: Tue, 21 Jun 2022 06:16:10 GMT
+Location: http://localhost:8081/orders/2
 Transfer-Encoding: chunked
 
 {
     "_links": {
         "order": {
-            "href": "http://localhost:8081/orders/3"
+            "href": "http://localhost:8081/orders/2"
         },
         "self": {
-            "href": "http://localhost:8081/orders/3"
+            "href": "http://localhost:8081/orders/2"
         }
     },
     "productId": 1,
@@ -337,10 +337,9 @@ Transfer-Encoding: chunked
 
 2. 배송이 시작됨
 ```
-http :8082/deliveries/2
-HTTP/1.1 200
+HTTP/1.1 200 
 Content-Type: application/hal+json;charset=UTF-8
-Date: Tue, 17 May 2022 12:18:11 GMT
+Date: Tue, 21 Jun 2022 06:16:59 GMT
 Transfer-Encoding: chunked
 
 {
@@ -352,38 +351,38 @@ Transfer-Encoding: chunked
             "href": "http://localhost:8082/deliveries/2"
         }
     },
-    "orderId": 3,
+    "orderId": 2,
     "productId": 1,
     "productName": null
 }
 ```
 ```
-{"eventType":"OrderPlaced","timestamp":"20220517211620","id":3,"productId":1,"qty":1,"productName":null,"me":true}
-{"eventType":"DeliveryStarted","timestamp":"20220517211620","id":2,"orderId":3,"productId":1,"productName":null,"me":true}
+{"eventType":"OrderPlaced","timestamp":"20220621061659","id":2,"productId":1,"qty":1,"productName":null,"me":true}
+{"eventType":"DeliveryStarted","timestamp":"20220621061720","id":2,"orderId":2,"productId":1,"productName":null,"me":true}
 ```
 3. 주문 취소함
 ```
-http DELETE :8081/orders/3
+http DELETE :8081/orders/2
 
-HTTP/1.1 204
-Date: Tue, 17 May 2022 12:19:31 GMT
+HTTP/1.1 204 
+Date: Tue, 21 Jun 2022 06:19:33 GMT
 ```
 
 4. 배송 취소됨
 ```
 http :8082/deliveries/2
 
-HTTP/1.1 404
+HTTP/1.1 404 
 Content-Length: 0
-Date: Tue, 17 May 2022 12:19:57 GMT
+Date: Tue, 21 Jun 2022 06:19:50 GMT
 ```
 
 5. kafka console 로 메시지 확인
 ```
-{"eventType":"OrderPlaced","timestamp":"20220517211620","id":3,"productId":1,"qty":1,"productName":null,"me":true}
-{"eventType":"DeliveryStarted","timestamp":"20220517211620","id":2,"orderId":3,"productId":1,"productName":null,"me":true}
-{"eventType":"OrderCancelled","timestamp":"20220517211931","id":3,"productId":1,"qty":1,"productName":null,"me":true}
-{"eventType":"DeliveryCancelled","timestamp":"20220517211931","id":2,"orderId":3,"productId":1,"productName":null,"me":true}
+{"eventType":"OrderPlaced","timestamp":"20220621061659","id":2,"productId":1,"qty":1,"productName":null,"me":true}
+{"eventType":"DeliveryStarted","timestamp":"20220621061659","id":2,"orderId":2,"productId":1,"productName":null,"me":true}
+{"eventType":"OrderCancelled","timestamp":"20220621061933","id":2,"productId":1,"qty":1,"productName":null,"me":true}
+{"eventType":"DeliveryCancelled","timestamp":"20220621061933","id":2,"orderId":2,"productId":1,"productName":null,"me":true}
 ```
 
 6. 주문삭제 이벤트 발행 소스
