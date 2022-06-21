@@ -212,7 +212,6 @@ gitpod /workspace/msa-capstone-project (main) $ http POST :8081/orders productId
 ```
 
 
-
 ``` 
 $ http get :8081/orders
 HTTP/1.1 200 
@@ -263,8 +262,8 @@ Transfer-Encoding: chunked
 /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic shopmall --from-beginning
 ```
 ```
-{"eventType":"OrderPlaced","timestamp":"20220517204951","id":1,"productId":1,"qty":1,"productName":null,"me":true}
-{"eventType":"DeliveryStarted","timestamp":"20220517205636","id":1,"orderId":1,"productId":1,"productName":null,"me":true}
+{"eventType":"OrderPlaced","timestamp":"20220621134951","id":1,"productId":1,"qty":1,"productName":null,"me":true}
+{"eventType":"DeliveryStarted","timestamp":"20220621135636","id":1,"orderId":1,"productId":1,"productName":null,"me":true}
 ```
 
 * orderView 서비스를 실행
@@ -276,28 +275,28 @@ mvn spring-boot:run
 * orderView의 Query Model을 통해 주문상태와 배송상태를 통합조회
 Query Model 은 발생한 모든 이벤트를 수신하여 자신만의 View로 데이터를 통합 조회 가능하게 함
 ```
-http localhost:8084/orderStatuses/235
+http localhost:8090/orderStatuses/1
 ```
 
 ```
-gitpod /workspace/msa-capstone-project (main) $ http :8084/orderStatuses/235
+gitpod /workspace/msa-capstone-project (main) $ http :8090/orderStatuses/1
 HTTP/1.1 200 
 Content-Type: application/hal+json;charset=UTF-8
-Date: Tue, 17 May 2022 06:07:01 GMT
+Date: Tue, 21 Jun 2022 06:03:58 GMT
 Transfer-Encoding: chunked
 
 {
     "_links": {
-        "orderView": {
-            "href": "http://localhost:8084/orderStatuses/235"
+        "orderStatus": {
+            "href": "http://localhost:8090/orderStatuses/1"
         },
         "self": {
-            "href": "http://localhost:8084/orderStatuses/235"
+            "href": "http://localhost:8090/orderStatuses/1"
         }
     },
-    "address": null,
-    "deliveryStatus": "delivery_started",
-    "orderStatus": "ordered",
+    "deliveryId": null,
+    "deliveryStatus": null,
+    "orderStatus": "OrderPlaced",
     "productId": 1,
     "productName": null,
     "qty": 1
