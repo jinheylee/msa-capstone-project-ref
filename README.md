@@ -211,28 +211,48 @@ mvn spring-boot:run
 gitpod /workspace/msa-capstone-project (main) $ http POST :8081/orders productId=1 qty=1
 ```
 
+
+
 ``` 
-HTTP/1.1 201 
-Content-Type: application/json;charset=UTF-8
-Date: Tue, 17 May 2022 05:14:37 GMT
-Location: http://localhost:8081/orders/235
+$ http get :8081/orders
+HTTP/1.1 200 
+Content-Type: application/hal+json;charset=UTF-8
+Date: Tue, 21 Jun 2022 05:49:39 GMT
 Transfer-Encoding: chunked
 
 {
+    "_embedded": {
+        "orders": [
+            {
+                "_links": {
+                    "order": {
+                        "href": "http://localhost:8081/orders/1"
+                    },
+                    "self": {
+                        "href": "http://localhost:8081/orders/1"
+                    }
+                },
+                "productId": 1,
+                "productName": null,
+                "qty": 1
+            }
+        ]
+    },
     "_links": {
-        "order": {
-            "href": "http://localhost:8081/orders/235"
+        "profile": {
+            "href": "http://localhost:8081/profile/orders"
         },
         "self": {
-            "href": "http://localhost:8081/orders/235"
+            "href": "http://localhost:8081/orders{?page,size,sort}",
+            "templated": true
         }
     },
-    "address": null,
-    "deliveryId": null,
-    "orderStatus": null,
-    "productId": "1",
-    "productName": null,
-    "qty": 1
+    "page": {
+        "number": 0,
+        "size": 20,
+        "totalElements": 1,
+        "totalPages": 1
+    }
 }
 
 
